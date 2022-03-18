@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import FormProduct from "./FormProduct";
 import ListProducts from "./ListProducts";
 
-function Main() {
-  const [products, setProducts] = useState([]);
+function Main({ products, setProducts, removeFromDom }) {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -13,10 +12,6 @@ function Main() {
       setLoaded(true);
     });
   }, []);
-
-  const removeFromDom = (productId) => {
-    setProducts(products.filter((product) => product._id !== productId));
-  };
 
   return (
     <>

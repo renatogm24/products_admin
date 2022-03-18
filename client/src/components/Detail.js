@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 
-const Detail = ({ id }) => {
+const Detail = ({ id, removeFromDom }) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
@@ -11,6 +11,15 @@ const Detail = ({ id }) => {
       setProduct(data.product);
     });
   }, []);
+
+  const deletePerson = (productId) => {
+    axios
+      .delete("http://localhost:8000/api/products/" + productId)
+      .then((res) => {
+        removeFromDom(productId);
+        navigate("/products");
+      });
+  };
 
   return (
     <div className="w-full flex flex-col justify-center items-center h-screen text-3xl">
@@ -27,6 +36,16 @@ const Detail = ({ id }) => {
           Edit
         </Button>
       </Link>
+      <Button
+        variant="contained"
+        color="error"
+        sx={{ marginTop: "20px" }}
+        onClick={(e) => {
+          deletePerson(id);
+        }}
+      >
+        Delete
+      </Button>
     </div>
   );
 };
