@@ -16,7 +16,7 @@ function Main({ products, setProducts, removeFromDom }) {
   return (
     <>
       <div className="w-96 mx-auto my-9">
-        <FormProduct />
+        <FormProduct products={products} setProducts={setProducts} />
       </div>
       {loaded && (
         <ListProducts products={products} removeFromDom={removeFromDom} />

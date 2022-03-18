@@ -4,7 +4,7 @@ import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
 import { upperFirst } from "lodash";
 
-const FormProduct = () => {
+const FormProduct = ({ products, setProducts }) => {
   const [inputs, setInputs] = useState({
     title: "",
     price: "",
@@ -73,6 +73,7 @@ const FormProduct = () => {
             open: false,
           });
         }, 2000);
+        setProducts([...products, res.data.product]);
       })
       .catch((error) => {
         const {
