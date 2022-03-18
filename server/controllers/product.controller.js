@@ -21,8 +21,22 @@ module.exports.createNewProduct = (req, res) => {
     );
 };
 
-module.exports.updateExistingProduct = (req, res) => {
-  Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+module.exports.updateExistingProduct = async (req, res) => {
+  Product.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    },
+    function (err, model) {
+      if (err) {
+        return res
+          .status(422)
+          .json({ message: "Something went wrong", error: err });
+      }
+    }
+  )
     .then((updatedProduct) => res.json({ product: updatedProduct }))
     .catch((err) => res.json({ message: "Something went wrong", error: err }));
 };

@@ -22,6 +22,11 @@ const Detail = ({ id }) => {
           Back to list
         </Button>
       </Link>
+      <Link to={`/products/${id}/edit`}>
+        <Button variant="contained" color="warning" sx={{ marginTop: "20px" }}>
+          Edit
+        </Button>
+      </Link>
     </div>
   );
 };

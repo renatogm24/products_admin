@@ -14,12 +14,18 @@ function Main() {
     });
   }, []);
 
+  const removeFromDom = (productId) => {
+    setProducts(products.filter((product) => product._id !== productId));
+  };
+
   return (
     <>
       <div className="w-96 mx-auto my-9">
         <FormProduct />
       </div>
-      {loaded && <ListProducts products={products} />}
+      {loaded && (
+        <ListProducts products={products} removeFromDom={removeFromDom} />
+      )}
     </>
   );
 }
